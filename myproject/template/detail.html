@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+    function Openform()
+{
+document.getElementById('form1').style.display = 'block';
+}
+<div style = "display:none">
+
+</script>
+
+    <style>
+    .button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+</style>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <script language="javascript" type="text/javascript">
+    function dynamicdropdown(listindex)
+    {
+        switch (listindex)
+        {
+        case "Computer Applications" :
+            document.getElementById("status").options[0]=new Option("Select Course","");
+            document.getElementById("status").options[1]=new Option("B.Sc","bsc");
+            document.getElementById("status").options[2]=new Option("BCA","BCA");
+            document.getElementById("status").options[3]=new Option("MCA","MCA");
+            break;
+        case "Commerce" :
+            document.getElementById("status").options[0]=new Option("Select Course","");
+            document.getElementById("status").options[1]=new Option("B.Com","B.Com");
+            document.getElementById("status").options[2]=new Option("M.Com","M.Com");
+            document.getElementById("status").options[3]=new Option("Ph.D","Phd");
+            break;
+
+        case "Management Studies" :
+            document.getElementById("status").options[0]=new Option("Select Course","");
+            document.getElementById("status").options[1]=new Option("BBA(Finance $& Accounts)","BBA(Finance $& Accounts)");
+            document.getElementById("status").options[2]=new Option("BBA(Banking & Finncial Markets)","BBA(Banking & Finncial Markets");
+            document.getElementById("status").options[3]=new Option("MBA","mba");
+            break;
+
+        case "Microbiology" :
+            document.getElementById("status").options[0]=new Option("Select Course","");
+            document.getElementById("status").options[1]=new Option("B.Sc","B.Sc");
+            document.getElementById("status").options[2]=new Option("M.Sc","M.Sc");
+            break;
+
+        case "Architecture $ Design" :
+            document.getElementById("status").options[0]=new Option("Select Course","");
+            document.getElementById("status").options[1]=new Option("B.Design","B.Design");
+            document.getElementById("status").options[2]=new Option("B.Sc Interior Design","B.Sc Interior Design");
+            document.getElementById("status").options[3]=new Option("M.Sc Interior Design","M.Sc Interior Design");
+            break;
+        }
+
+
+
+        return true;
+    }
+    </script>
+
+</head>
+<body>
+<form>
+    {% csrf_token %}
+    <input type="button"  onclick="document.getElementById('form1').style.display = 'block'"  class="button" value="Click Me!" >
+</form>
+
+ <div id = "form1" style = "display:none">
+
+<h1><b><center>Form Requirements</center></b></h1>
+<form  method="post" action="detail" align="center">
+        {% csrf_token %}
+    <label for="name"  >Name</label>
+        <input type="text" name="name" id="name" >
+    <label for="dob" class="col-sm-2 col-form-label">Date of Birth</label>
+    <input type="date" name="dob" id="dob"><br><br>
+    <label for="age" class="col-sm-2 col-form-label">Age</label>
+    <input type="text" name="age" id="age" ><br><br>
+    <label for="gender" class="col-sm-2 col-form-label"> Gender</label>
+    <br><br><input type="radio" name="gender" id="gender">Female
+           <input type="radio" name="gender" id="gender1">Male<br><br>
+    <label for="mob" class="col-sm-2 col-form-label"> Mobile Number</label>
+    <input type="number" id="mob" name="mob" ><br><br>
+
+    <label for="email" class="col-sm-2 col-form-label"> Email</label>
+
+    <input type="email" name="email" id="email"><br><br>
+
+    <label for="address" class="col-sm-2 col-form-label"> Address</label>
+
+    <textarea name="address" id="address"></textarea><br><br>
+
+
+
+    <label for="source" class="col-sm-2 col-form-label"> Department:</label>
+
+<!--    <div class="category_div" id="category_div">-->
+        <select id="source" name="source" onchange="javascript: dynamicdropdown(this.options[this.selectedIndex].value);">
+        <option value="">Select Department</option>
+        <option value="Computer Applications">Computer Applications</option>
+        <option value="Commerce">Commerce</option>
+            <option value="Management Studies">Management Studies</option>
+              <option value="Microbiology">Microbiology</option>
+                  <option value="Architecture $ Design">Architecture $ Design</option>
+        </select>
+<!--    </div>-->
+ <br>   <label for="sub_category_div" class="col-sm-2 col-form-label"> Course:</label>
+
+   <div class="sub_category_div" id="sub_category_div">
+        <script  type="text/javascript" language="JavaScript"  class="sub_category_div" >
+        document.write('<select name="status" id="status"><option value="">Select Course</option></select>')
+        </script>
+    </div>
+<br>
+
+    <label for="purpose" class="col-sm-2 col-form-label"> Purpose:</label>
+
+
+
+        <select id="purpose" name="purpose">
+        <option value="">Select Purpose</option>
+        <option value="enquiry">Enquiry</option>
+        <option value="order">Place Order</option>
+            <option value="return">Return</option>
+                </select><br><br>
+
+    <label for="purpose" class="col-sm-2 col-form-label"> Materials Provide:</label>
+
+
+
+
+    <input type="checkbox" id="book" name="book" value="book">
+  <label for="book"> Notebook</label>
+  <input type="checkbox" id="pen" name="pen" value="pen">
+  <label for="pen"> Pen</label>
+  <input type="checkbox" id="paper" name="paper" value="paper">
+  <label for="paper"> Exam Papers</label>
+    <input type="checkbox" id="card" name="card" value="card">
+  <label for="card"> ID Card</label>
+
+
+<br><br>
+    <button  class="button">Submit</button>
+    <a href="logout" class="button">Logout</a>
+</form>
+  </div>
+
+{% for msg in messages %}
+{{msg}}
+<br><a href="/">Back To Home Page</a>
+{% endfor %}
+</body>
+</html>
